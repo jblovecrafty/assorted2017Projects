@@ -1,0 +1,98 @@
+{  
+   "insults":[  
+      {  
+         "severityOfInsult":"1",
+         "listOfInsults":[  
+            {  
+               "typeOfInsult":"Your Momma",
+               "insultList":[  
+                  "%s, your momma is so fat, when she trips there is an earthquake.",
+                  "%s, your momma is so dumb she thinks american cheese is real cheese."
+               ]
+            },
+            {  
+               "typeOfInsult":"Sarcasm",
+               "insultList":[  
+                  "%s, you are cool.",
+                  "I like you, %s."
+               ]
+            },
+            {  
+               "typeOfInsult":"Literary",
+               "insultList":[  
+                  "%s, you are so pedantic, you make Polonius look succinct.",
+                  "%s, you are about as quick as Lenny is."
+               ]
+            },
+            {  
+               "typeOfInsult":"Non Sequiter",
+               "insultList":[  
+                  "%s, snails run where you tread.",
+                  "%s, purple."
+               ]
+            },
+            {  
+               "typeOfInsult":"Science",
+               "insultList":[  
+                  "%s, you are so dense you make neutron stars look light and fluffy.",
+                  "%s, you are proof that intelligent design is not a viable theory."
+               ]
+            },
+            {  
+               "typeOfInsult":"Obscure Nerdery",
+               "insultList":[  
+                  "%s, is your int less than 10?",
+                  "%s, you are about as useful as exhaust port on a Deathstar."
+               ]
+            }
+         ]
+      },
+      {  
+         "severityOfInsult":"2",
+         "listOfInsults":[  
+            {  
+               "typeOfInsult":"Your Momma",
+               "insultList":[  
+                  "%s, your momma is so ugly she needs corrective surgery...really."
+               ]
+            },
+            {  
+               "typeOfInsult":"Sarcasm",
+               "insultList":[  
+                  "%s, you are manager material.",
+                  "I think you are the coolest, %s."
+               ]
+            },
+            {  
+               "typeOfInsult":"Literary",
+               "insultList":[  
+                  "%s, you are so creepy you make Gollum look cool.",
+                  "%s, you are more whiny than Holden Caulfield.",
+                  "%s, your writing makes Herman Melville's look like light reading."
+               ]
+            },
+            {  
+               "typeOfInsult":"Non Sequiter",
+               "insultList":[  
+                  "%s, red.",
+                  "%s, the fish are afraid."
+               ]
+            },
+            {  
+               "typeOfInsult":"Science",
+               "insultList":[  
+                  "%s, how does it feel to be 3 stardard deviations below the average for intellect?",
+                  "%s, you are a classic example of the inverse ratio between the size of the mouth and the size of the brain."
+               ]
+            },
+            {  
+               "typeOfInsult":"Obscure Nerdery",
+               "insultList":[  
+                  "%s, you are a Filthy casual.",
+                  "%s, you are about as useful as Porkins was on the trench run."
+               ]
+            }
+         ]
+      }
+   ]
+}
