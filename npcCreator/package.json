@@ -1,0 +1,11 @@
+{
+    "name": "npc_builder",
+    "version": "1.0.0",
+    "description": "Build a Random NPC for D&D...the title says it all",
+    "main": "app.js",
+    "author": "Joe Jones",
+    "license": "MIT",
+    "dependencies": {
+        "typescript": "2.6.1"
+    }
+}

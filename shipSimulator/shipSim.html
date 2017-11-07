@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Space Ship Simulator</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="shipSimEvents.js"></script>
+<script src="shipSim.js"></script>
+<script src="shipSimUI.js"></script>
+</head>
+
+<body>
+	<div id="shipStartScreenFirstStage">
+		<div>Ship Name <input type="text" name="shipName" id="shipName"></div>
+		<div>Leader Name <input type="text" name="leaderName" id="leaderName"></div>
+		<select name="shipPoints" id="shipPoints">
+			<option value="1">Space space station turned generation ship (1 build points)</option>
+		  	<option value="3">Ship cobbled together from scavenged parts (3 build points)</option>
+		  	<option value="5">Organized colonization effort by large nation state (5 build points)</option>
+			<option value="7">World wide effort at deep space ship (7 build points)</option>
+		</select>
+		<div>Number of Years to Destination <input type="number" min="1" name="yearsToDestination" id="yearsToDestination"></div>
+		<a href="javascript:void(0)" id="moveToStageTwo" class="btn btn-primary">Move on to Ship Building</a>
+	</div>
+	<div id="shipStartScreenSecondStage">
+		<div>Number of Points: <span id="shipStartScreenSecondStageNumPoints"></span></div><br/>
+		<table >
+			<tbody>
+				<tr>
+					<td>Food</td>
+					<td>Energy</td>
+					<td>Tech</td>
+					<td>People</td>
+					<td>Morale</td>
+				</tr>
+				<tr>
+					<td> 
+						<p id="foodStatStart"></p><br>
+						<a href="javascript:void(0)" id="foodUpStart" class="btn btn-primary">Increase Food</a>
+						<a href="javascript:void(0)" id="foodDownStart" class="btn btn-default">Reduce Food</a>
+					</td>
+					<td> 
+						<p id="energyStatStart"></p><br>
+						<a href="javascript:void(0)" id="energyUpStart" class="btn btn-primary">Increase Energy</a>
+						<a href="javascript:void(0)" id="energyDownStart" class="btn btn-default">Reduce Energy</a>
+					</td>
+					<td> 
+						<p id="techStatStart"></p><br>
+						<a href="javascript:void(0)" id="techUpStart" class="btn btn-primary">Increase Tech</a>
+						<a href="javascript:void(0)" id="techDownStart" class="btn btn-default">Reduce Tech</a>
+					</td>
+					<td>
+						<p id="peopleStatStart"></p><br>
+						<a href="javascript:void(0)" id="peopleUpStart" class="btn btn-primary">Increase People</a>
+						<a href="javascript:void(0)" id="peopleDownStart" class="btn btn-default">Reduce People</a> 
+					</td>
+					<td> 
+						<p id="moraleStatStart"></p><br>
+						<a href="javascript:void(0)" id="moraleUpStart" class="btn btn-primary">Increase Morale</a>
+						<a href="javascript:void(0)" id="moraleDownStart" class="btn btn-default">Reduce Morale</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<a href="javascript:void(0)" id="launchShip" class="btn btn-primary">Launch Ship</a>
+	</div>
+	<div id="shipVoyage">
+	<div id="shipStats">
+	</div>
+	<div id="shipControls">
+	
+	<table >
+		<tbody>
+			<tr>
+				<td>Food</td>
+				<td>Energy</td>
+				<td>Tech</td>
+				<td>People</td>
+				<td>Morale</td>
+			</tr>
+			<tr>
+				<td> 
+					<p id="foodStat"></p><br>
+					<a href="javascript:void(0)" id="foodUp" class="btn btn-primary">Increase Food</a>
+					<a href="javascript:void(0)" id="foodDown" class="btn btn-default">Reduce Food</a>
+				</td>
+				<td> 
+					<p id="energyStat"></p><br>
+					<a href="javascript:void(0)" id="energyUp" class="btn btn-primary">Increase Energy</a>
+					<a href="javascript:void(0)" id="energyDown" class="btn btn-default">Reduce Energy</a>
+				</td>
+				<td> 
+					<p id="techStat"></p><br>
+					<a href="javascript:void(0)" id="techUp" class="btn btn-primary">Increase Tech</a>
+					<a href="javascript:void(0)" id="techDown" class="btn btn-default">Reduce Tech</a>
+				</td>
+				<td>
+					<p id="peopleStat"></p><br>
+					<a href="javascript:void(0)" id="peopleUp" class="btn btn-primary">Increase People</a>
+					<a href="javascript:void(0)" id="peopleDown" class="btn btn-default">Reduce People</a> 
+				</td>
+				<td> 
+					<p id="moraleStat"></p><br>
+					<a href="javascript:void(0)" id="moraleUp" class="btn btn-primary">Increase Morale</a>
+					<a href="javascript:void(0)" id="moraleDown" class="btn btn-default">Reduce Morale</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<h3>Number of Years Left on Voyage: <span id="yearCounter"></span></h3>
+	<a href="javascript:void(0)" id="travelAnotherYear" class="btn btn-primary">Travel Another Year</a>
+</div>
+	<div id="shipLog">
+
+	</div>
+	</div>
+</body>
+
+</html>
