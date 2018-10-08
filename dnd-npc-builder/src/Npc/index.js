@@ -1,15 +1,16 @@
-import { Character } from "./Character";
-import { Stats } from "./Character";
-import { Name } from "./Character";
+import { Character } from "../Character";
+import { Stats } from "../Character";
+import { Name } from "../Character";
+import { Personality } from "../Character";
+import { Appearance } from "../Character";
+import { Items } from "../Character";
 
 export class RandomNPCGenerator {  
-    public npc: Character;
-
-    constructor(npc: Character) {
+    constructor(npc) {
         this.npc = npc;
     }
 
-    private raceList = [
+    raceList = [
         { race: "human", chance: .3, statMods: { str: 1, dex: 1, con: 1, int: 1, wis: 1, cha: 1 } },
         { race: "halfling", chance: .2, statMods: { str: 0, dex: 2, con: 0, int: 0, wis: 0, cha: 0 } },
         { race: "gnome", chance: .2, statMods: { str: 0, dex: 0, con: 0, int: 2, wis: 0, cha: 0 } },
@@ -17,7 +18,7 @@ export class RandomNPCGenerator {
         { race: "half orc", chance: .05, statMods: { str: 2, dex: 0, con: 0, int: 0, wis: 0, cha: 0 } }
     ];
     
-    private levelList = [
+    levelList = [
         { level: 0, chance: .15 },
         { level: 1, chance: .25 },
         { level: 2, chance: .25 },
@@ -27,32 +28,32 @@ export class RandomNPCGenerator {
         { level: 6, chance: .05 },
     ];
     
-    private gender = [{ gender: "male", chance: .5 }, { gender: "female", chance: .5 }];
+    gender = [{ gender: "male", chance: .5 }, { gender: "female", chance: .5 }];
     
     //source for names http://brandondraga.tumblr.com/post/66804468075/chris-perkins-npc-name-list
-    protected readonly maleHumanFirstNames = ["Anlow", "Arando", "Bram", "Cale", "Dalkon", "Daylen", "Dodd", "Dungarth", "Dyrk", "Eandro", "Falken", "Feck", "Fenton", "Gryphero", "Hagar", "Jeras", "Krynt", "Lavant", "Leyten", "Madian", "Malfier", "Markus", "Meklan", "Namen", "Navaren", "Nerle", "Nilus", "Ningyan", "Norris", "Quentin", "Semil", "Sevenson", "Steveren", "Talfen", "Tamond", "Taran", "Tavon", "Tegan", "Vanan", "Vincent"];
-    private readonly femaleHumanFirstNames = ["Azura", "Brey", "Hallan", "Kasaki", "Lorelei", "Mirabel", "Pharana", "Remora", "Rosalyn", "Sachil", "Saidi", "Tanika", "Tura", "Tylsa", "Vencia", "Xandrilla"];
-    private readonly humanLastName = ["Arkalis", "Armanci", "Bilger", "Blackstrand", "Brightwater", "Carnavon", "Caskajaro", "Coldshore", "Coyle", "Cresthill", "Cuttlescar", "Daargen", "Dalicarlia", "Danamark", "Donoghan", "Drumwind", "Dunhall", "Ereghast", "Falck", "Fallenbridge", "Faringray", "Fletcher", "Fryft", "Goldrudder", "Grantham", "Graylock", "Gullscream", "Hindergrass", "Iscalon", "Kreel", "Kroft", "Lamoth", "Leerstrom", "Lynchfield", "Moonridge", "Netheridge", "Oakenheart", "Pyncion", "Ratley", "Redraven", "Revenmar", "Roxley", "Sell", "Seratolva", "Shanks", "Shattermast", "Shaulfer", "Silvergraft", "Stavenger", "Stormchapel", "Strong", "Swiller", "Talandro ", "Targana", "Towerfall", "Umbermoor", "Van Devries", "Van Gandt", "Van Hyden", "Varcona", "Varzand", "Voortham", "Vrye", "Webb", "Welfer", "Wilxes", "Wintermere", "Wygarthe", "Zatchet", "Zethergyll"];
+    maleHumanFirstNames = ["Anlow", "Arando", "Bram", "Cale", "Dalkon", "Daylen", "Dodd", "Dungarth", "Dyrk", "Eandro", "Falken", "Feck", "Fenton", "Gryphero", "Hagar", "Jeras", "Krynt", "Lavant", "Leyten", "Madian", "Malfier", "Markus", "Meklan", "Namen", "Navaren", "Nerle", "Nilus", "Ningyan", "Norris", "Quentin", "Semil", "Sevenson", "Steveren", "Talfen", "Tamond", "Taran", "Tavon", "Tegan", "Vanan", "Vincent"];
+    femaleHumanFirstNames = ["Azura", "Brey", "Hallan", "Kasaki", "Lorelei", "Mirabel", "Pharana", "Remora", "Rosalyn", "Sachil", "Saidi", "Tanika", "Tura", "Tylsa", "Vencia", "Xandrilla"];
+    humanLastName = ["Arkalis", "Armanci", "Bilger", "Blackstrand", "Brightwater", "Carnavon", "Caskajaro", "Coldshore", "Coyle", "Cresthill", "Cuttlescar", "Daargen", "Dalicarlia", "Danamark", "Donoghan", "Drumwind", "Dunhall", "Ereghast", "Falck", "Fallenbridge", "Faringray", "Fletcher", "Fryft", "Goldrudder", "Grantham", "Graylock", "Gullscream", "Hindergrass", "Iscalon", "Kreel", "Kroft", "Lamoth", "Leerstrom", "Lynchfield", "Moonridge", "Netheridge", "Oakenheart", "Pyncion", "Ratley", "Redraven", "Revenmar", "Roxley", "Sell", "Seratolva", "Shanks", "Shattermast", "Shaulfer", "Silvergraft", "Stavenger", "Stormchapel", "Strong", "Swiller", "Talandro ", "Targana", "Towerfall", "Umbermoor", "Van Devries", "Van Gandt", "Van Hyden", "Varcona", "Varzand", "Voortham", "Vrye", "Webb", "Welfer", "Wilxes", "Wintermere", "Wygarthe", "Zatchet", "Zethergyll"];
     
-    private readonly maleHaflingFirstNames = ["Arthan", "Carvin", "Corby", "Cullen", "Egen", "Ernest", "Gedi", "Heron", "Jeryl", "Keffen", "Kylem", "Kynt", "Leskyn", "Neff", "Orne", "Quarrel", "Rabbit", "Rilkin", "Snakebait", "Tarfen", "Titch", "Tuck", "Whim"];
-    private readonly femaleHalflingFirstNames = ["Caliope", "Emily", "Piper", "Rixi", "Sabretha", "Teg", "Tilly", "Toira", "Vexia", "Vil", "Vzani", "Zanthe", "Ziza"];
-    private readonly halflingLastNames = ["Angler", "Battlestone", "Blackwater", "Daggersharp", "Deepstrider", "Hollowpot", "Puddle", "Raftmite", "Skiprock", "Silverfin", "Tanglestrand", "Tricker", "Willowrush", "Yellowcrane"];
+    maleHaflingFirstNames = ["Arthan", "Carvin", "Corby", "Cullen", "Egen", "Ernest", "Gedi", "Heron", "Jeryl", "Keffen", "Kylem", "Kynt", "Leskyn", "Neff", "Orne", "Quarrel", "Rabbit", "Rilkin", "Snakebait", "Tarfen", "Titch", "Tuck", "Whim"];
+    femaleHalflingFirstNames = ["Caliope", "Emily", "Piper", "Rixi", "Sabretha", "Teg", "Tilly", "Toira", "Vexia", "Vil", "Vzani", "Zanthe", "Ziza"];
+    halflingLastNames = ["Angler", "Battlestone", "Blackwater", "Daggersharp", "Deepstrider", "Hollowpot", "Puddle", "Raftmite", "Skiprock", "Silverfin", "Tanglestrand", "Tricker", "Willowrush", "Yellowcrane"];
     
-    private readonly maleDwarfFirstNames = ["Agaro", "Arnan", "Auxlan", "Avamir", "Baelnar", "Balfam", "Bariken", "Borkûl", "Darkûl", "Dolmen", "Dyrnar", "Erag", "Ezegan", "Ferrek", "Garmûl", "Glint", "Ghorvas", "Grimmalk", "Haeltar", "Halagmar", "Halzar", "Hlant", "Korlag", "Krag", "Krim", "Kurman", "Lurtrum", "Malagar", "Mardam", "Maulnar", "Melgar", "Morak", "Orobok", "Rogath", "Roken", "Rozag", "Sabakzar", "Sharak", "Smethykk", "Swargar", "Thorbalt", "Thorin", "Tredigar", "Vabûl", "Vistrum", "Wolvar"];
-    private readonly femaleDwarfFirstNames = ["Beyla", "Fenryl", "Grenenzel", "Krystolari", "Lokara", "Lurka", "Marnia", "Praxana", "Rokel", "Roksana", "Thurlfara", "Vauldra", "Veklani", "Vronwe", "Zebel"];
-    private readonly dwarfLastNames = ["Ambershard", "Barrelhelm", "Copperhearth", "Deepmiddens", "Drakantal", "Evermead", "Garkalan", "Grimtor", "Hackshield", "Irongull", "Markolak", "Ramcrown", "Rockharvest", "Silvertarn", "Skandalor", "Zarkanan"];
+    maleDwarfFirstNames = ["Agaro", "Arnan", "Auxlan", "Avamir", "Baelnar", "Balfam", "Bariken", "Borkûl", "Darkûl", "Dolmen", "Dyrnar", "Erag", "Ezegan", "Ferrek", "Garmûl", "Glint", "Ghorvas", "Grimmalk", "Haeltar", "Halagmar", "Halzar", "Hlant", "Korlag", "Krag", "Krim", "Kurman", "Lurtrum", "Malagar", "Mardam", "Maulnar", "Melgar", "Morak", "Orobok", "Rogath", "Roken", "Rozag", "Sabakzar", "Sharak", "Smethykk", "Swargar", "Thorbalt", "Thorin", "Tredigar", "Vabûl", "Vistrum", "Wolvar"];
+    femaleDwarfFirstNames = ["Beyla", "Fenryl", "Grenenzel", "Krystolari", "Lokara", "Lurka", "Marnia", "Praxana", "Rokel", "Roksana", "Thurlfara", "Vauldra", "Veklani", "Vronwe", "Zebel"];
+    dwarfLastNames = ["Ambershard", "Barrelhelm", "Copperhearth", "Deepmiddens", "Drakantal", "Evermead", "Garkalan", "Grimtor", "Hackshield", "Irongull", "Markolak", "Ramcrown", "Rockharvest", "Silvertarn", "Skandalor", "Zarkanan"];
     
     //source for names https://xaeyruudh.wordpress.com/2012/04/16/gnomish-names/
-    private readonly gnomeMaleFirstNames = ["Annikko", "Aolor", "Apnee", "Arn", "Balto", "Birzoon", "Bramo", "Burgell", "Cline", "Colmarr", "Crayloon", "Cuirboly", "Dak", "Dorgan", "Eckel", "Ensu", "Erb", "Erkenwald", "Falrinn", "Furduch", "Gormadoc", "Gostegottl", "Gundigoot", "Gwaylar", "Halanan", "Halbrinn", "Hallap", "Hamarka", "Hensu", "Hewett", "Hoch", "Hoose", "Igsenki", "Ikitur", "Jaroo", "Juutar", "Kantelleki", "Kutar", "Kyliki", "Lakajan", "Larimo", "Lelmose", "Lotch", "Lynen", "Malesacar", "Miep", "Mirge", "Moczama", "Myroc", "Nebin", "Nizam", "Noj", "Norbor", "Notar", "Nuados", "Orlamm", "Osomo", "Oyun", "Pello", "Piletti", "Pinker", "Poot", "Quonzar", "Ramne", "Redef", "Rondell", "Sahir", "Samoinan", "Sahtwyrn", "Spah", "Spugnor", "Stolig", "Suram", "Swa", "Tahir", "Tamatar", "Tamoinen", "Thrang", "Uani", "Uli", "Unferth", "Unqin", "Verhoo", "Veter", "Vlodge", "Voynan", "Wilf", "Yarol", "Yipwyg", "Zupesh", "Zygur"];
-    private readonly gnomeFemaleFirstNames = ["Ahtva", "Bitha", "Calanddra", "Cirilli", "Eriss", "Finla", "Iviss", "Jaree", "Kasma", "Lissa", "Meree", "Nathee", "Penabwa", "Tamora", "Zelazadda"];
-    private readonly gnomeLastNames = ["Abren", "Aelnor", "Bachin", "Banilor", "Blackrock", "Blimth", "Danask", "Durim", "Fasketel", "Furnak", "Galeb", "Greatorm", "Grosko", "Hardin", "Hymnir", "Jarnak", "Kellen", "Kyri", "Lundor", "Merren", "Nessik", "Pernor", "Quindal", "Ranadal", "Rivenstone", "Rustek", "Rutvor", "Sasken", "Shasto", "Skerrit", "Tamble", "Tavartarr", "Terrick", "Turco", "Urvor", "Uvarkk", "Vandek", "Vilio", "Walnir", "Whitehorn", "Yimble"];
+    gnomeMaleFirstNames = ["Annikko", "Aolor", "Apnee", "Arn", "Balto", "Birzoon", "Bramo", "Burgell", "Cline", "Colmarr", "Crayloon", "Cuirboly", "Dak", "Dorgan", "Eckel", "Ensu", "Erb", "Erkenwald", "Falrinn", "Furduch", "Gormadoc", "Gostegottl", "Gundigoot", "Gwaylar", "Halanan", "Halbrinn", "Hallap", "Hamarka", "Hensu", "Hewett", "Hoch", "Hoose", "Igsenki", "Ikitur", "Jaroo", "Juutar", "Kantelleki", "Kutar", "Kyliki", "Lakajan", "Larimo", "Lelmose", "Lotch", "Lynen", "Malesacar", "Miep", "Mirge", "Moczama", "Myroc", "Nebin", "Nizam", "Noj", "Norbor", "Notar", "Nuados", "Orlamm", "Osomo", "Oyun", "Pello", "Piletti", "Pinker", "Poot", "Quonzar", "Ramne", "Redef", "Rondell", "Sahir", "Samoinan", "Sahtwyrn", "Spah", "Spugnor", "Stolig", "Suram", "Swa", "Tahir", "Tamatar", "Tamoinen", "Thrang", "Uani", "Uli", "Unferth", "Unqin", "Verhoo", "Veter", "Vlodge", "Voynan", "Wilf", "Yarol", "Yipwyg", "Zupesh", "Zygur"];
+    gnomeFemaleFirstNames = ["Ahtva", "Bitha", "Calanddra", "Cirilli", "Eriss", "Finla", "Iviss", "Jaree", "Kasma", "Lissa", "Meree", "Nathee", "Penabwa", "Tamora", "Zelazadda"];
+    gnomeLastNames = ["Abren", "Aelnor", "Bachin", "Banilor", "Blackrock", "Blimth", "Danask", "Durim", "Fasketel", "Furnak", "Galeb", "Greatorm", "Grosko", "Hardin", "Hymnir", "Jarnak", "Kellen", "Kyri", "Lundor", "Merren", "Nessik", "Pernor", "Quindal", "Ranadal", "Rivenstone", "Rustek", "Rutvor", "Sasken", "Shasto", "Skerrit", "Tamble", "Tavartarr", "Terrick", "Turco", "Urvor", "Uvarkk", "Vandek", "Vilio", "Walnir", "Whitehorn", "Yimble"];
     
     //souce for names http://www.fantasynamegenerators.com/dnd-half-orc-names.php
-    private readonly halfOrcMaleFirstNames = ["Boronur", "Sarurash", "Hagenar", "Mugudurk", "Ganatir", "Soromar", "Muraarim", "Haguz", "Asodall", "Urtrosk"];
-    private readonly halfOrcFemaleFirstNames = ["Aragri", "Shayazura", "Karug", "Shemur", "Semotar", "Alanar", "Zanagur", "Temosh", "Tuome", "Temogum"];
-    private readonly halfOrcLastNames = ["the Mad", "Skull Taker", "Eater of Foes", "the Lost", "of the North", "Blunt Blade", "the Crafty", "Night Haunter", "Drinker of Blood", "Breaker of Bones", "the Sword Cleaver"];
+    halfOrcMaleFirstNames = ["Boronur", "Sarurash", "Hagenar", "Mugudurk", "Ganatir", "Soromar", "Muraarim", "Haguz", "Asodall", "Urtrosk"];
+    halfOrcFemaleFirstNames = ["Aragri", "Shayazura", "Karug", "Shemur", "Semotar", "Alanar", "Zanagur", "Temosh", "Tuome", "Temogum"];
+    halfOrcLastNames = ["the Mad", "Skull Taker", "Eater of Foes", "the Lost", "of the North", "Blunt Blade", "the Crafty", "Night Haunter", "Drinker of Blood", "Breaker of Bones", "the Sword Cleaver"];
 
-    private statProbability = [
+    statProbability = [
         { number: 3, chance: 0.0049 },
         { number: 4, chance: 0.0138 },
         { number: 5, chance: 0.0277 },
@@ -71,7 +72,7 @@ export class RandomNPCGenerator {
         { number: 18, chance: 0.0049 },
     ];
     
-    private classes = [
+    classes = [
         { class: "Barbarian", chance: 0.025 },
         { class: "Bard", chance: 0.05 },
         { class: "Cleric", chance: 0.05 },
@@ -93,7 +94,7 @@ export class RandomNPCGenerator {
         { class: "Noble", chance: 0.025 },
     ];
     
-    private alignment = [
+    alignment = [
         { alignment: "Lawful Good", chance: 0.025 },
         { alignment: "Neutral Good", chance: 0.20 },
         { alignment: "Chaotic Good", chance: 0.20 },
@@ -106,7 +107,7 @@ export class RandomNPCGenerator {
     ];
 
     //some taken from https://nerdsonearth.com/2015/03/npc-personality-traits-dnd-5e/
-    private physicalTraits = [
+    physicalTraits = [
         {
             partOfNpc: "Hair", 
             descriptors: [
@@ -190,8 +191,8 @@ export class RandomNPCGenerator {
         }
     ]
 
-    // source http://scott.maclure.info/character-traits/traits-default.json
-    private basicPersonalityTraits = [
+    // source http://scott.maclure.info/character-traits/traits-G.json
+    basicPersonalityTraits = [
         "Accusative",
 		"Active",
 		"Adventurous",
@@ -593,7 +594,7 @@ export class RandomNPCGenerator {
     ]
 
     // organizational ideas and descriptors from http://strolen.com/viewing/NPC_Characteristics
-    private personalityTraits = [
+    personalityTraits = [
         {
             partOfNpc: "Verbal",
             descriptors: [
@@ -693,7 +694,7 @@ export class RandomNPCGenerator {
         }
     ];
 
-    private martialMeleeWeapons = [
+    martialMeleeWeapons = [
         "Battleaxe",
         "Flail",
         "Glaive",
@@ -714,7 +715,7 @@ export class RandomNPCGenerator {
         "Whip"
     ];
 
-    private martialRangedWeapons = [
+    martialRangedWeapons = [
         "Blowgun",
         "Crossbow, hand",
         "Crossbow, heavy",
@@ -722,7 +723,7 @@ export class RandomNPCGenerator {
         "Net"
     ];
 
-    private simpleMeleeWeapons = [
+    simpleMeleeWeapons = [
         "Club",
         "Dagger",
         "Greatclub",
@@ -735,20 +736,20 @@ export class RandomNPCGenerator {
         "Spear"
     ];
 
-    private simpleRangedWeapons = [
+    simpleRangedWeapons = [
         "Crossbow",
         "Dart",
         "Shortbow",
         "Sling"
     ];
 
-    private lightArmor = [
+    lightArmor = [
         "Padded",
         "Leather",
         "Studded leather"
     ];
 
-    private mediumArmor = [
+    mediumArmor = [
         "Hide",
         "Chain shirt",
         "Scale mail",
@@ -756,14 +757,14 @@ export class RandomNPCGenerator {
         "Half plate"
     ];
 
-    private heavyArmor = [
+    heavyArmor = [
         "Ring mail",
         "Chain mail",
         "Splint",
         "Plate"
     ]
 
-    private commonGear = [
+    commonGear = [
         "Abacus",
         "Acid (vial)",
         "Alchemist's fire (flask)",
@@ -849,7 +850,7 @@ export class RandomNPCGenerator {
         "Whetstone"
     ];
 
-    private specialItemsBase = [
+    specialItemsBase = [
         "A mummified goblin hand",
         "A piece of crystal that faintly glows in the moonlight",
         "A gold coin minted in an unknown land",
@@ -952,245 +953,245 @@ export class RandomNPCGenerator {
         "A metal urn containing the ashes of a hero"
     ]
 
-    private weapons = [
+    weapons = [
         {
-            class: "Barbarian", 
+            characterClass: "Barbarian", 
             items: ["Great Axe", "Two hand axes", ...this.martialMeleeWeapons, ...this.simpleMeleeWeapons]
         },
         {
-            class: "Bard", 
+            characterClass: "Bard", 
             items: ["hand crossbows", "long swords", "rapier", "short swords", ...this.simpleMeleeWeapons]
         },
         {
-            class: "Cleric", 
+            characterClass: "Cleric", 
             items: ["Mace", "War Hammer", "rapier", "short swords", "light crossbow", ...this.simpleMeleeWeapons]
         },
         {
-            class: "Druid", 
+            characterClass: "Druid", 
             items: ["Clubs", "Daggers", "Darts", "Javelins", "Maces", "Quarterstaffs", "Scimitar", "Sickle", "Slings", "Spear"]
         },
         {
-            class: "Fighter", 
+            characterClass: "Fighter", 
             items: [...this.martialMeleeWeapons, ...this.simpleMeleeWeapons]
         },
         {
-            class: "Monk", 
+            characterClass: "Monk", 
             items: ["Short Swords", ...this.simpleMeleeWeapons]
         },
         {
-            class: "Paladin", 
+            characterClass: "Paladin", 
             items: [...this.martialMeleeWeapons, ...this.simpleMeleeWeapons]
         },
         {
-            class: "Ranger", 
+            characterClass: "Ranger", 
             items: [...this.martialMeleeWeapons, ...this.simpleMeleeWeapons]
         },
         {
-            class: "Rogue", 
+            characterClass: "Rogue", 
             items: ["Hand Crossbow", "Long Sword", "Rapier", "Short Sword", ...this.simpleMeleeWeapons]
         },
         {
-            class: "Sorcerer", 
+            characterClass: "Sorcerer", 
             items: ["Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbow"]
         },
         {
-            class: "Warlock", 
+            characterClass: "Warlock", 
             items: [...this.simpleMeleeWeapons]
         },
         {
-            class: "Wizard", 
+            characterClass: "Wizard", 
             items: ["Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbow"]
         },
         {
-            class: "Merchant", 
+            characterClass: "Merchant", 
             items: ["Daggers", "Light Crossbow"]
         },
         {
-            class: "Clergy", 
+            characterClass: "Clergy", 
             items: ["Daggers", "Quarterstaffs"]
         },
         {
-            class: "Artisan", 
+            characterClass: "Artisan", 
             items: ["Daggers"]
         },
         {
-            class: "Laborer", 
+            characterClass: "Laborer", 
             items: ["Club"]
         },
         {
-            class: "Worker", 
+            characterClass: "Worker", 
             items: ["Clubs", "Daggers", "Darts" ]
         },
         {
-            class: "Criminal", 
+            characterClass: "Criminal", 
             items: [...this.simpleMeleeWeapons, ...this.simpleRangedWeapons]
         },
         {
-            class: "Noble", 
+            characterClass: "Noble", 
             items: ["hand crossbows", "long swords", "rapier", "short swords"]
         }
     ];
 
-    private armor = [
+    armor = [
         {
-            class: "Barbarian", 
+            characterClass: "Barbarian", 
             items: [this.lightArmor, this.mediumArmor]
         },
         {
-            class: "Bard", 
+            characterClass: "Bard", 
             items: [...this.lightArmor]
         },
         {
-            class: "Cleric", 
+            characterClass: "Cleric", 
             items: ["Scale mail", "leather armor", "chainmail", ...this.lightArmor]
         },
         {
-            class: "Druid", 
+            characterClass: "Druid", 
             items: [...this.lightArmor, ...this.mediumArmor]
         },
         {
-            class: "Fighter", 
+            characterClass: "Fighter", 
             items: [...this.lightArmor, ...this.mediumArmor, ...this.heavyArmor]
         },
         {
-            class: "Monk", 
+            characterClass: "Monk", 
             items: ["None"]
         },
         {
-            class: "Paladin", 
+            characterClass: "Paladin", 
             items: [...this.lightArmor, ...this.mediumArmor, ...this.heavyArmor]
         },
         {
-            class: "Ranger", 
+            characterClass: "Ranger", 
             items: [...this.lightArmor, ...this.mediumArmor]
         },
         {
-            class: "Rogue", 
+            characterClass: "Rogue", 
             items: [...this.lightArmor]
         },
         {
-            class: "Sorcerer", 
+            characterClass: "Sorcerer", 
             items: ["None"]
         },
         {
-            class: "Warlock", 
+            characterClass: "Warlock", 
             items: [...this.lightArmor]
         },
         {
-            class: "Wizard", 
+            characterClass: "Wizard", 
             items: ["None"]
         },
         {
-            class: "Merchant", 
+            characterClass: "Merchant", 
             items: ["None"]
         },
         {
-            class: "Clergy", 
+            characterClass: "Clergy", 
             items: ["None"]
         },
         {
-            class: "Artisan", 
+            characterClass: "Artisan", 
             items: ["None"]
         },
         {
-            class: "Laborer", 
+            characterClass: "Laborer", 
             items: ["None"]
         },
         {
-            class: "Worker", 
-            items: ["None" ]
+            characterClass: "Worker", 
+            items: ["None"]
         },
         {
-            class: "Criminal", 
+            characterClass: "Criminal", 
             items: ["None", ...this.lightArmor]
         },
         {
-            class: "Noble", 
+            characterClass: "Noble", 
             items: ["None", ...this.lightArmor]
         }
     ];
 
-    private specialItems = [
+    specialItems = [
         {
-            class: "Barbarian", 
+            characterClass: "Barbarian", 
             items: [...this.specialItemsBase]
         },
         {
-            class: "Bard", 
+            characterClass: "Bard", 
             items: ["Musical Instrument of great value", ...this.specialItemsBase]
         },
         {
-            class: "Cleric", 
+            characterClass: "Cleric", 
             items: ["Magic Item: Uncommon", "Magic Item: Common", ...this.specialItemsBase]
         },
         {
-            class: "Druid", 
+            characterClass: "Druid", 
             items: ["Tooth of animal friend", "Magic Item: Uncommon", "Magic Item: Common", ...this.specialItemsBase]
         },
         {
-            class: "Fighter", 
+            characterClass: "Fighter", 
             items: [...this.specialItemsBase]
         },
         {
-            class: "Monk", 
+            characterClass: "Monk", 
             items: ["Book of Wisdom", "Magic Item: Uncommon", "Magic Item: Common", ...this.specialItemsBase]
         },
         {
-            class: "Paladin", 
+            characterClass: "Paladin", 
             items: ["Valuable Holy Text", "Heritical Text", "Magic Item: Uncommon", "Magic Item: Common", ...this.specialItemsBase]
         },
         {
-            class: "Ranger", 
+            characterClass: "Ranger", 
             items: ["Skull of defeated foe", "Magic Item: Uncommon", "Magic Item: Common", ...this.specialItemsBase]
         },
         {
-            class: "Rogue", 
+            characterClass: "Rogue", 
             items: ["50 gold", "+1 Dagger", "Poison", "Gambling Debt", "Magic Item: Uncommon", "Magic Item: Common", ...this.specialItemsBase]
         },
         {
-            class: "Sorcerer", 
+            characterClass: "Sorcerer", 
             items: ["Magic Item: Rare", "Magic Item: Uncommon", "Magic Item: Common", ...this.specialItemsBase]
         },
         {
-            class: "Warlock", 
+            characterClass: "Warlock", 
             items: ["Magic Item: Rare", "Poison", "Heritical Text", "Magic Item: Uncommon", "Magic Item: Common", ...this.specialItemsBase]
         },
         {
-            class: "Wizard", 
+            characterClass: "Wizard", 
             items: ["Magic Item: Rare", "Magic Item: Uncommon", "Magic Item: Common", ...this.specialItemsBase]
         },
         {
-            class: "Merchant", 
+            characterClass: "Merchant", 
             items: ["Sample of Wares", ...this.specialItemsBase]
         },
         {
-            class: "Clergy", 
+            characterClass: "Clergy", 
             items: ["Holy relic", ...this.specialItemsBase]
         },
         {
-            class: "Artisan", 
+            characterClass: "Artisan", 
             items: ["Prized set of tools", ...this.specialItemsBase]
         },
         {
-            class: "Laborer", 
+            characterClass: "Laborer", 
             items: [...this.specialItemsBase]
         },
         {
-            class: "Worker", 
+            characterClass: "Worker", 
             items: [...this.specialItemsBase]
         },
         {
-            class: "Rogue", 
+            characterClass: "Rogue", 
             items: ["50 gold", "Black Mail note for wealthy noble", "Poison", "Gambling Debt", ...this.specialItemsBase]
         },
         {
-            class: "Noble", 
-            items: ["150 gold", "2 Gems (100gp each)", "Magic Item: Common",, "Poison", "Gambling Debt", ...this.specialItemsBase]
+            characterClass: "Noble", 
+            items: ["150 gold", "2 Gems (100gp each)", "Magic Item: Common", "Poison", "Gambling Debt", ...this.specialItemsBase]
         }
     ];
 
 
-    private calculateAccumulatedChance(arrayOfChances):void {
+    calculateAccumulatedChance(arrayOfChances) {
         let currentPercentage = 0;
     
         arrayOfChances.forEach(function(element) {
@@ -1199,7 +1200,7 @@ export class RandomNPCGenerator {
         });
     }
     
-    private chancePicker(arrayOfItems):any {
+    chancePicker(arrayOfItems) {
         let percentage = Math.random();
         this.calculateAccumulatedChance(arrayOfItems);
     
@@ -1210,11 +1211,11 @@ export class RandomNPCGenerator {
         }
     }
 
-    private namePicker(race, gender):Name {    
+    namePicker(race, gender) {    
         let nameObject = new Name();
     
-        function nameBuilder(maleFirstName, femaleFirstName, lastName):void {
-            if (gender == "male") {
+        function nameBuilder(maleFirstName, femaleFirstName, lastName) {
+            if (gender === "male") {
                 nameObject.firstName = maleFirstName[Math.floor(Math.random() * maleFirstName.length)];
             } else {
                 nameObject.firstName = femaleFirstName[Math.floor(Math.random() * femaleFirstName.length)];
@@ -1239,12 +1240,14 @@ export class RandomNPCGenerator {
             case "half orc":
                 nameBuilder(this.halfOrcMaleFirstNames, this.halfOrcFemaleFirstNames, this.halfOrcLastNames);
                 break;
+            default:
+                break;
         }
     
         return nameObject;
     }
     
-    private statBlockBuilder(raceStatMods):Stats {
+    statBlockBuilder(raceStatMods) {
         let stats = new Stats();
     
         for (const key of Object.keys(stats)) {
@@ -1258,33 +1261,84 @@ export class RandomNPCGenerator {
         return stats;
     }
 
-    public generateNPC():Character {
+    //function for random choices in trait array of objects 
+    //get random index then go into descriptor and pick a random item
+    pickRandomFromTrait(traitDictionary){
+        let randomDescriptor = this.getRandomIntInclusive(0, traitDictionary.length);
+        let itemsFromDescriptor = traitDictionary[randomDescriptor].descriptors;
+
+        let randomItem = itemsFromDescriptor[this.getRandomIntInclusive(0, itemsFromDescriptor.length)];
+
+        return randomItem;
+    }
+
+    getRandomIntInclusive(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min; 
+      }
+
+    generateNPC() {
         let race = this.chancePicker(this.raceList);
-        this.npc.race = race.race;
+        let raceName = race.race;
 
-        this.npc.gender = this.chancePicker(this.gender).gender;
+        let gender = this.chancePicker(this.gender).gender;
+        let name = this.namePicker(raceName, this.gender);
 
-        let name = this.namePicker(race.race, this.npc.gender);
-        this.npc.firstName = name.firstName;
-        this.npc.lastName = name.lastName;
-
-        this.npc.alignment = this.chancePicker(this.alignment).alignment;
-
+        let alignment = this.chancePicker(this.alignment).alignment;
         let stats = this.statBlockBuilder(race.statMods);
-        this.npc.stats.cha = stats.cha;
-        this.npc.stats.con = stats.con;
-        this.npc.stats.dex = stats.dex;
-        this.npc.stats.int = stats.int;
-        this.npc.stats.str = stats.str;
-        this.npc.stats.wis = stats.wis;
-
-        this.npc.level = this.chancePicker(this.levelList).level;
+        let level = this.chancePicker(this.levelList).level;
 
         // TODO: Add stat checking.
-        this.npc.class = this.chancePicker(this.classes).class;
+        let npcClass = this.chancePicker(this.classes).class;
 
-        //roll twice on physical and mental traits
+        //roll once on basic personality trait
+        let basicPersonality = this.basicPersonalityTraits[this.getRandomIntInclusive(0, this.basicPersonalityTraits.length)];
+        
+        //roll again on basic personality trait for minor trait. do not duplicate basic
+        let majorPersonalityTrait = this.pickRandomFromTrait(this.personalityTraits);
+        let minorPersonalityTrait = this.pickRandomFromTrait(this.personalityTraits);
 
-        return this.npc;
+        while(majorPersonalityTrait == minorPersonalityTrait){
+            minorPersonalityTrait = this.pickRandomFromTrait(this.personalityTraits);
+        }
+
+        let personality = new Personality(majorPersonalityTrait, minorPersonalityTrait, basicPersonality);
+
+        //roll twice on physical and mental traits but no duplicates
+        let majorPhysicalTrait = this.pickRandomFromTrait(this.physicalTraits);
+        let minorPhysicalTrait = this.pickRandomFromTrait(this.physicalTraits);
+
+        while(majorPhysicalTrait == minorPhysicalTrait){
+            minorPhysicalTrait = this.pickRandomFromTrait(this.physicalTraits);
+        }
+
+        let appearance = new Appearance(majorPhysicalTrait, minorPhysicalTrait);
+
+        //roll once on weapons, armor,commonGear, special items
+        function getItemForClass(npcClass, items){
+            let characterClassItems = items.filter((classItems)=> {
+                if(classItems.characterClass === npcClass) return classItems;
+            });
+
+        function getRandomIntInclusiveInner(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min; 
+            }
+
+            characterClassItems = characterClassItems[0].items;
+            let itemForClass = characterClassItems[getRandomIntInclusiveInner(0, characterClassItems.length)];
+            return itemForClass;
+        }
+
+        let weapons = getItemForClass(npcClass, this.weapons);
+        let armor = getItemForClass(npcClass, this.armor);
+        let commonItem = this.commonGear[this.getRandomIntInclusive(0, this.commonGear.length)];
+        let specialItem = getItemForClass(npcClass, this.specialItems);
+
+        let items = new Items(weapons, armor, commonItem, specialItem);
+
+        return new Character(stats, name, raceName, gender, alignment, level, npcClass, personality, items, appearance);
     }
 }
