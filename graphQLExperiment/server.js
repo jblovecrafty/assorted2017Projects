@@ -76,7 +76,7 @@ const root = {
     updateUser: updateUser
 };
 
-// Build express server and GraphQL endpoint
+// Build express server and GraphQL endpoint 
 const app =  express();
 
 app.use('/graphql', graphqlHTTP({
